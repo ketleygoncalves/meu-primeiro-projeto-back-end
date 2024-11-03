@@ -12,3 +12,4 @@ async function conectaBancoDeDados(){
 }
 
 module.exports = conectaBancoDeDados
+

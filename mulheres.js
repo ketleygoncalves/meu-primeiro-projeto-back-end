@@ -78,7 +78,8 @@ router.patch('/mulheres/:id', corrigeMulher); // rota PATCH /mulheres/:id
 router.delete('/mulheres/:id', deletaMulher); // rota DELETE /mulheres/:id
 
 // Montando o router no app
-app.use(router);
+app.use(router.post('/mulheres', criaMulher))
 
 // Servidor ouvindo a porta
 app.listen(porta, mostraPorta);
+
