@@ -1,5 +1,6 @@
 const express = require("express"); // iniciando o express
 const router = express.Router(); // configurando o router
+const cors = require('cors') // instalando cors - permite consumir api no front-end
 
 const conectaBancoDeDados = require('./bancoDeDados');
 conectaBancoDeDados(); // conectando ao banco de dados
@@ -8,6 +9,8 @@ const Mulher = require('./mulherModel'); // modelo da mulher
 
 const app = express(); // iniciando o app
 app.use(express.json()); // configurando para usar JSON
+app.use(cors())
+
 const porta = 3333; // criando a porta
 
 // Função GET - Mostra Mulheres
@@ -72,10 +75,10 @@ function mostraPorta() {
 }
 
 // Configuração das rotas
-router.get('/mulheres', mostraMulheres); // rota GET /mulheres
-router.post('/mulheres', criaMulher); // rota POST /mulheres
-router.patch('/mulheres/:id', corrigeMulher); // rota PATCH /mulheres/:id
-router.delete('/mulheres/:id', deletaMulher); // rota DELETE /mulheres/:id
+app.use(router.get('/mulheres', mostraMulheres)); // rota GET /mulheres
+app.use(router.post('/mulheres', criaMulher)); // rota POST /mulheres
+app.use(router.patch('/mulheres/:id', corrigeMulher)); // rota PATCH /mulheres/:id
+app.use(router.delete('/mulheres/:id', deletaMulher)); // rota DELETE /mulheres/:id
 
 // Montando o router no app
 app.use(router.post('/mulheres', criaMulher))
